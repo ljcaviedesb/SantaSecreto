@@ -99,7 +99,7 @@ function actualizarDescripcionEnSheet(nombre, descripcion) {
 // Obtener el nombre desde la URL
 const urlParams = new URLSearchParams(window.location.search);
 const nombre = urlParams.get('nombre');  // Ejemplo: "Ana"
-const codigo = urlParams.get('codigo');  // Ejemplo: "GT4R5"
+//const codigo = urlParams.get('codigo');  // Ejemplo: "GT4R5"
 
 // Mostrar la información cuando el usuario hace clic en "Mostrar Información"
 function mostrarInformacion() {
