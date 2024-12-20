@@ -1,13 +1,13 @@
-let auth2;
+//let auth2;
 
 // Inicializar la API de Google y la autenticación
-function initGoogleAPI() {
+/*function initGoogleAPI() {
   console.log("La API de Google se está cargando...");
   gapi.load('client:auth2', initAuth); // Aquí se carga la autenticación y la API
-}
+}*/
 
 // Inicializar la autenticación de Google OAuth2
-function initAuth() {
+/*function initAuth() {
   console.log("Autenticación de Google iniciada...");
   gapi.auth2.init({
     client_id: '356174108484-cn1o3ant9648cemlkr333b6u0eu6g94o.apps.googleusercontent.com',  // Reemplaza esto con tu Client ID de OAuth 2.0
@@ -18,15 +18,55 @@ function initAuth() {
     // Ahora que la autenticación está lista, inicializa la API de Google Sheets
     initSheetsAPI();
   });
+}*/
+// Inicializar la autenticación de Google usando Google Identity Services (GIS)
+function initAuth() {
+  console.log("Autenticación de Google iniciada...");
+
+  // Reemplaza '356174108484-cn1o3ant9648cemlkr333b6u0eu6g94o.apps.googleusercontent.com' con tu client ID
+  google.accounts.id.initialize({
+    client_id: '356174108484-cn1o3ant9648cemlkr333b6u0eu6g94o.apps.googleusercontent.com',  // Tu ID de cliente de OAuth 2.0
+    callback: handleCredentialResponse  // Función que maneja la respuesta de la autenticación
+  });
+
+  // Renderiza el botón de inicio de sesión
+  google.accounts.id.renderButton(
+    document.getElementById("googleSignInButton"), // El contenedor del botón
+    { theme: "outline", size: "large" } // Opciones de diseño para el botón
+  );
+}
+
+// Callback que maneja la respuesta después de que el usuario inicie sesión
+function handleCredentialResponse(response) {
+  console.log("ID Token:", response.credential);
+
+  // Aquí puedes hacer algo con el token ID, como verificar la autenticación
+  // y luego inicializar la API de Google Sheets.
+  // Si tienes el ID token, lo puedes usar para autenticación con tu backend
+  initSheetsAPI(response.credential); // Usamos el ID token para autenticar con Sheets
 }
 
 // Inicializar la API de Google Sheets
-function initSheetsAPI() {
+/*function initSheetsAPI() {
   console.log("API de Google Sheets cargada...");
   gapi.client.load('sheets', 'v4', function() {
     console.log('API de Sheets cargada correctamente');
   });
+}*/
+function initSheetsAPI(idToken) {
+  gapi.client.init({
+    apiKey: 'AIzaSyA43cgs6m9Cb_4Klamy9m5HO6Zapre3_10',
+    clientId: '356174108484-cn1o3ant9648cemlkr333b6u0eu6g94o.apps.googleusercontent.com',
+    scope: 'https://www.googleapis.com/auth/spreadsheets.readonly',
+    discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
+    access_token: idToken  // Usa el ID token aquí
+  }).then(function() {
+    console.log("API de Sheets cargada correctamente");
+  }).catch(function(error) {
+    console.error("Error al cargar la API de Sheets", error);
+  });
 }
+
 
 // Función para obtener el amigo secreto desde Google Sheets
 function obtenerAmigoSecreto(nombre) {
@@ -128,4 +168,5 @@ function toggleMenu() {
 }
 
 // Llamar la función para inicializar Google API cuando la página cargue
-window.onload = initGoogleAPI;
+//window.onload = initGoogleAPI;
+window.onload = initAuth;

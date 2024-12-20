@@ -54,9 +54,14 @@
   <!-- Carga la librería de Google API -->
   <script src="https://apis.google.com/js/api.js"></script>
   <script src="https://apis.google.com/js/platform.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
 
   <!-- Tu script de JavaScript -->
   <script src="../script.js"></script>
+
+  <!-- Contenedor donde se renderizará el botón de Google Sign-In -->
+  <div id="googleSignInButton"></div>
 
   <!-- Llamar la función para inicializar Google API cuando la página cargue -->
   <script>
