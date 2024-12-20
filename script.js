@@ -10,7 +10,7 @@ function initGoogleAPI() {
 function initAuth() {
   console.log("Autenticación de Google iniciada...");
   gapi.auth2.init({
-    client_id: '1024252976338-mpu56blu75sisi49a8lk9i71fgv5rc89.apps.googleusercontent.com',  // Reemplaza esto con tu Client ID de OAuth 2.0
+    client_id: '356174108484-cn1o3ant9648cemlkr333b6u0eu6g94o.apps.googleusercontent.com',  // Reemplaza esto con tu Client ID de OAuth 2.0
   }).then(function() {
     auth2 = gapi.auth2.getAuthInstance();
     console.log('Autenticación inicializada');
