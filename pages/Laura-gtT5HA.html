@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laura&gtT5HA</title>
+  <title>Laura-gtT5HA</title>
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
@@ -23,50 +23,48 @@
       <li><a href="../index.html" onclick="redirigir('Hugo')">Hugo</a></li>
       <li><a href="../index.html" onclick="redirigir('Javier')">Javier</a></li>
       <li><a href="../index.html" onclick="redirigir('JuanDi')">JuanDi</a></li>
-      <li><a href="Laura&gtT5HA.html" onclick="redirigir('Laura')">Laura</a></li>
+      <li><a href="Laura-gtT5HA.html" onclick="redirigir('Laura')">Laura</a></li>
       <li><a href="../index.html" onclick="redirigir('Oscar')">Oscar</a></li>
       <li><a href="../index.html" onclick="redirigir('Paura')">Paura</a></li>
     </ul>
   </div>
   <!-- Fila con imagen de SS.png y botón -->
   <section class="contenido">
-    <!-- Imagen centrada de SS.png -->
-    <img id="imagen" src="../img/SS.png" alt="Imagen Santa Secreto" class="imagen-ss">
+    <!-- Contenedor de la imagen y la información -->
+    <div class="informacion-container">
+      <!-- Imagen centrada de SS.png -->
+      <img id="imagen" src="../img/SS.png" alt="Imagen Santa Secreto" class="imagen-ss">
+      <!-- Nueva imagen (inicialmente oculta) -->
+      <img id="imagen-ss1" class="imagen-ss1" src="../img/SS.png" alt="Imagen SS1" style="display: none;">
 
+      <!-- Contenedor de la información -->
+      <div id="informacionAmigo" class="informacion">
+        <p id="nombreAmigo"></p>
+        <p id="descripcionAmigo"></p>
+      </div>
+    </div>
+  
     <!-- Botón de mostrar información -->
     <button id="mostrarInformacionBtn" onclick="mostrarInformacion()">Mostrar Información</button>
-    <div id="informacionAmigo">
-      <p id="nombreAmigo"></p>
-      <p id="descripcionAmigo"></p>
-    </div>
+  
     <!-- Párrafo con instrucciones -->
     <p id="instrucciones">
       ¡Bienvenido al juego de Santa Secreto! Haz clic en el botón para descubrir quién es tu amigo secreto y ver la información que tu amigo ha dejado para ti. Tambien, podrás añadir una tus gustos o lo que te gustaría recibir de regalo esta navidad para ayudar a tu Santa Secreto a encontrar el regalo perfecto para ti. El monto mínimo este año es de $90.000, lo sé, la inflación está terrible, pero va a ser un regalo que darás con mucho amor y recibirás con mucho amor. 
     </p>
-
+  
     <!-- Botón de mostrar descripción -->
     <button id="descripcionBtn" onclick="mostrarFormulario()">Escribir Descripción</button>
-
+  
     <!-- Formulario para la descripción -->
     <div id="formulario" class="formulario">
       <textarea id="descripcion" placeholder="Escribe tu descripción aquí"></textarea>
       <button onclick="actualizarDescripcionEnSheet()">Enviar</button>
     </div>
   </section>
-
-  <!-- Carga la librería de Google API -->
-  <script src="https://apis.google.com/js/api.js"></script>
-  <script src="https://apis.google.com/js/platform.js"></script>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-
+  
 
   <!-- Tu script de JavaScript -->
   <script src="../script.js"></script>
 
-
-  <!-- Llamar la función para inicializar Google API cuando la página cargue -->
-  <script>
-    window.onload = initGoogleAPI;
-  </script>
 </body>
 </html>

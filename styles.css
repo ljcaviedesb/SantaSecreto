@@ -77,6 +77,14 @@ header {
   transition: opacity 0.5s ease;
 }
 
+/* Estilo para la nueva imagen SS1 */
+.imagen-ss1 {
+  display: none;
+  max-width: 10%;  /* Establecemos el tamaño de la nueva imagen al 10% */
+  height: auto;
+  transition: opacity 0.5s ease;
+}
+
 /* Botón de Mostrar Información */
 button {
   display: block;
@@ -95,6 +103,21 @@ button:hover {
   background-color: #45a049;
 }
 
+
+
+/* Estilo para el contenedor de la información */
+.informacion-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 50%;
+}
+
+/* Estilo para los textos dentro de la información */
+.informacion-container p {
+  margin: 5px 0;  /* Espaciado entre los elementos de información */
+}
 /* Estilo para el párrafo de broma */
 #broma {
   text-align: center;
