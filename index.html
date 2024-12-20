@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ana&GT4R5</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Encabezado con fondo verde degradé -->
+  <header>
+    <h1>Santa Secreto</h1>
+  </header>
+  
+  <!-- Fila con imagen de SS.png y botón -->
+  <section class="contenido">
+    <!-- Imagen centrada de SS.png -->
+    <img id="imagen" src="./img/SS.png" alt="Imagen Santa Secreto" class="imagen-ss">
+
+    <!-- Broma -->
+    <p id="broma">
+        ¡¡JAJAJA No puedes ver nada!! ¡Devuélvete a la página anterior amiguis!
+    </p>
+    <!-- Párrafo con instrucciones -->
+    <p id="instrucciones">
+      Recuerda que el monto mínimo este año es de $90.000, lo sé, la inflación está terrible, pero va a ser un regalo que darás con mucho amor y recibirás con mucho amor. 
+    </p>
+
+    
+
+  <!-- Carga la librería de Google API -->
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script src="https://apis.google.com/js/platform.js"></script>
+
+  <!-- Tu script de JavaScript -->
+  <script src="script.js"></script>
+
+  <!-- Llamar la función para inicializar Google API cuando la página cargue -->
+  <script>
+    window.onload = initGoogleAPI;
+  </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+/* Estilo para el botón de menú */
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 2em;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+/* Menú desplegable */
+.menu {
+  display: none;
+  position: absolute;
+  top: 60px;  /* Para que el menú no se sobreponga al encabezado */
+  left: 0;
+  background-color: #333;
+  width: 200px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu ul li {
+  margin: 10px 0;
+}
+
+.menu ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+  display: block;
+  padding: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.menu ul li a:hover {
+  background-color: #575757;
+}
+
+/* Para cuando el menú está visible */
+.menu.show {
+  display: block;
+}
+
+/* Estilo del título */
+header h1 {
+  text-align: center;
+  font-size: 2.5em;
+  color: #840303;
+  margin: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: linear-gradient(to bottom, #00b200, #ffffff);
+}
+
+/* Estilo para el encabezado */
+header {
+  background: linear-gradient(to bottom, #00b200, #ffffff);
+  padding: 20px;
+  text-align: center;
+}
+
+
+/* Estilo de la imagen de SS */
+.imagen-ss {
+  display: block;
+  margin: 30px auto;
+  max-width: 30%;  /* Imagen con un tamaño relativo */
+  height: auto;
+  transition: opacity 0.5s ease;
+}
+
+/* Botón de Mostrar Información */
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Estilo para el párrafo de broma */
+#broma {
+  text-align: center;
+  font-size: 2em;
+  color: #840303;
+  max-width: 80%;
+  margin: 0 auto 20px auto;  
+}
+
+/* Estilo para el párrafo de instrucciones */
+#instrucciones {
+  text-align: center;
+  font-size: 1.1em;
+  color: #555;
+  max-width: 80%;
+  margin: 0 auto 20px auto;
+}
+
+/* Estilo del formulario */
+.formulario {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.formulario textarea {
+  width: 80%;
+  height: 150px;
+  padding: 10px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.formulario button {
+  background-color: #45a049;
+  padding: 10px 20px;
+  font-size: 1.1em;
+}
+
+.formulario button:hover {
+  background-color: #45a049;
+}
+
+/* Media query para adaptar el diseño a pantallas pequeñas */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 3em;
+  }
+
+  .imagen-ss {
+    max-width: 30%;
+  }
+
+  #instrucciones {
+    font-size: 1em;
+  }
+}
