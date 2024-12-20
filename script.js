@@ -2,9 +2,19 @@ document.getElementById("mostrarInformacion").addEventListener("click", mostrarI
 
 // Obtener el nombre de la persona desde la URL
 function obtenerNombreDesdeURL() {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get("nombre");  // Obtener el parámetro 'nombre' de la URL
+  const url = window.location.href;  // Obtener la URL completa
+  const regex = /\/([^\/&]+)&/;  // Expresión regular para capturar el nombre entre el último '/' y '&'
+  const match = url.match(regex);  // Buscar coincidencias en la URL
+  
+  if (match && match[1]) {
+    return match[1];  // Si se encuentra, devolver el nombre
+  } else {
+    return null;  // Si no se encuentra, devolver null
+  }
 }
+
+console.log(obtenerNombreDesdeURL());  // Para verificar que se obtiene correctamente el nombre
+
 
 function mostrarInformacion() {
   const nombreUsuario = obtenerNombreDesdeURL();  // Obtener el nombre del parámetro en la URL
