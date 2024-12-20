@@ -3,7 +3,7 @@ document.getElementById("mostrarInformacion").addEventListener("click", mostrarI
 // Obtener el nombre de la persona desde la URL
 function obtenerNombreDesdeURL() {
   const url = window.location.href;  // Obtener la URL completa
-  const regex = /\/([^\/&]+)&/;  // Expresión regular para capturar el nombre entre el último '/' y '&'
+  const regex = /\/([^\/&]+)(?=&)/;  // Expresión regular para capturar el nombre entre el último '/' y '&'
   const match = url.match(regex);  // Buscar coincidencias en la URL
   
   if (match && match[1]) {
@@ -50,10 +50,10 @@ function procesarCSV(csv) {
     const celdas = filas[i].split(',');  // Dividir las celdas por comas
     if (celdas.length >= 4) {  // Asegurarse de que haya al menos 4 celdas (nombre, código, amigoSecreto, descripcion)
       amigos.push({
-        nombre: celdas[0].trim(),
-        codigo: celdas[1].trim(),
-        amigoSecreto: celdas[2].trim(),
-        descripcion: celdas[3] ? celdas[3].trim() : ''
+        nombre: celdas[0].trim(),         // Primer columna: Nombre
+        codigo: celdas[1].trim(),         // Segunda columna: Código
+        amigoSecreto: celdas[2].trim(),   // Tercera columna: Amigo Secreto
+        descripcion: celdas[3] ? celdas[3].trim() : '' // Cuarta columna: Descripción
       });
     }
   }
