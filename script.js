@@ -1,172 +1,60 @@
-//let auth2;
+document.getElementById("mostrarInformacion").addEventListener("click", mostrarInformacion);
 
-// Inicializar la API de Google y la autenticación
-/*function initGoogleAPI() {
-  console.log("La API de Google se está cargando...");
-  gapi.load('client:auth2', initAuth); // Aquí se carga la autenticación y la API
-}*/
-
-// Inicializar la autenticación de Google OAuth2
-/*function initAuth() {
-  console.log("Autenticación de Google iniciada...");
-  gapi.auth2.init({
-    client_id: '356174108484-cn1o3ant9648cemlkr333b6u0eu6g94o.apps.googleusercontent.com',  // Reemplaza esto con tu Client ID de OAuth 2.0
-  }).then(function() {
-    auth2 = gapi.auth2.getAuthInstance();
-    console.log('Autenticación inicializada');
-    
-    // Ahora que la autenticación está lista, inicializa la API de Google Sheets
-    initSheetsAPI();
-  });
-}*/
-// Inicializar la autenticación de Google usando Google Identity Services (GIS)
-function initAuth() {
-  console.log("Autenticación de Google iniciada...");
-
-  // Reemplaza '356174108484-cn1o3ant9648cemlkr333b6u0eu6g94o.apps.googleusercontent.com' con tu client ID
-  google.accounts.id.initialize({
-    client_id: '356174108484-cn1o3ant9648cemlkr333b6u0eu6g94o.apps.googleusercontent.com',  // Tu ID de cliente de OAuth 2.0
-    callback: handleCredentialResponse  // Función que maneja la respuesta de la autenticación
-  });
-
-  // Renderiza el botón de inicio de sesión
-  google.accounts.id.renderButton(
-    document.getElementById("googleSignInButton"), // El contenedor del botón
-    { theme: "outline", size: "large" } // Opciones de diseño para el botón
-  );
+// Obtener el nombre de la persona desde la URL
+function obtenerNombreDesdeURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get("nombre");  // Obtener el parámetro 'nombre' de la URL
 }
 
-// Callback que maneja la respuesta después de que el usuario inicie sesión
-function handleCredentialResponse(response) {
-  console.log("ID Token:", response.credential);
-
-  // Aquí puedes hacer algo con el token ID, como verificar la autenticación
-  // y luego inicializar la API de Google Sheets.
-  // Si tienes el ID token, lo puedes usar para autenticación con tu backend
-  initSheetsAPI(response.credential); // Usamos el ID token para autenticar con Sheets
-}
-
-// Inicializar la API de Google Sheets
-/*function initSheetsAPI() {
-  console.log("API de Google Sheets cargada...");
-  gapi.client.load('sheets', 'v4', function() {
-    console.log('API de Sheets cargada correctamente');
-  });
-}*/
-function initSheetsAPI(idToken) {
-  gapi.client.init({
-    apiKey: 'AIzaSyA43cgs6m9Cb_4Klamy9m5HO6Zapre3_10',
-    clientId: '356174108484-cn1o3ant9648cemlkr333b6u0eu6g94o.apps.googleusercontent.com',
-    scope: 'https://www.googleapis.com/auth/spreadsheets.readonly',
-    discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
-    access_token: idToken  // Usa el ID token aquí
-  }).then(function() {
-    console.log("API de Sheets cargada correctamente");
-  }).catch(function(error) {
-    console.error("Error al cargar la API de Sheets", error);
-  });
-}
-
-
-// Función para obtener el amigo secreto desde Google Sheets
-function obtenerAmigoSecreto(nombre) {
-  return new Promise((resolve, reject) => {
-    if (gapi.client.sheets) {
-      console.log("Haciendo solicitud a Google Sheets...");
-      gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: '1yy3piHXjzUPZ-VEQFsE1-CFgNf99o1eSLeqm28tlptU',  // Tu ID de hoja de Google Sheets
-        range: 'Usuarios!A2:C'  // Rango de celdas donde está el nombre y el amigo secreto
-      }).then((response) => {
-        const rows = response.result.values;
-        for (let i = 0; i < rows.length; i++) {
-          const row = rows[i];
-          if (row[0] === nombre) {
-            resolve(row[2]);  // La columna C tiene el nombre del amigo secreto
-            return;
-          }
-        }
-        reject('Nombre no encontrado');
-      }).catch((error) => {
-        reject('Error al acceder a la hoja de Google Sheets: ' + error.message);
-      });
-    } else {
-      reject('API de Sheets no está disponible.');
-    }
-  });
-}
-
-// Mostrar el formulario para ingresar la descripción
-function mostrarFormulario() {
-    document.getElementById('formulario').style.display = 'block';
+function mostrarInformacion() {
+  const nombreUsuario = obtenerNombreDesdeURL();  // Obtener el nombre del parámetro en la URL
+  
+  // Verificar que el nombre esté presente en la URL
+  if (!nombreUsuario) {
+    alert("No se ha encontrado el nombre en la URL.");
+    return;
   }
 
-// Función para actualizar la descripción en Google Sheets
-function actualizarDescripcionEnSheet(nombre, descripcion) {
-  gapi.client.sheets.spreadsheets.values.get({
-    spreadsheetId: '1yy3piHXjzUPZ-VEQFsE1-CFgNf99o1eSLeqm28tlptU',
-    range: 'Usuarios!A2:D'  // Leemos todas las filas de A a D
-  }).then((response) => {
-    const rows = response.result.values;
-    for (let i = 0; i < rows.length; i++) {
-      const row = rows[i];
-      if (row[0] === nombre) {
-        const rowIndex = i + 2;  // Las filas en Google Sheets comienzan desde la fila 2
-        const range = `Usuarios!D${rowIndex}`;
-        const requestData = {
-          spreadsheetId: '1yy3piHXjzUPZ-VEQFsE1-CFgNf99o1eSLeqm28tlptU',
-          range: range,
-          valueInputOption: 'RAW',
-          resource: {
-            values: [
-              [descripcion]
-            ]
-          }
-        };
+  fetch('data/amigos.csv')  // Ruta al archivo CSV dentro del repositorio
+    .then(response => response.text())
+    .then(data => {
+      // Procesar el archivo CSV y buscar el amigo secreto
+      const amigos = procesarCSV(data);
+      const amigoSecreto = obtenerAmigoSecreto(amigos, nombreUsuario);
 
-        gapi.client.sheets.spreadsheets.values.update(requestData).then((response) => {
-          console.log('Descripción actualizada', response);
-        }, (error) => {
-          console.error('Error al actualizar la descripción', error);
-        });
-        break;
+      // Mostrar la información
+      if (amigoSecreto) {
+        document.getElementById("nombreAmigo").innerText = `Amigo Secreto: ${amigoSecreto.amigoSecreto}`;
+        document.getElementById("codigoAmigo").innerText = `Código: ${amigoSecreto.codigo}`;
+        document.getElementById("descripcionAmigo").innerText = amigoSecreto.descripcion || 'No hay descripción';
+      } else {
+        alert("No se encontró el amigo secreto para este nombre.");
       }
-    }
-  }).catch((error) => {
-    console.error('Error al obtener las filas', error);
-  });
-}
-
-// Obtener el nombre desde la URL
-const urlParams = new URLSearchParams(window.location.search);
-const nombre = urlParams.get('nombre');  // Ejemplo: "Ana"
-//const codigo = urlParams.get('codigo');  // Ejemplo: "GT4R5"
-
-// Mostrar la información cuando el usuario hace clic en "Mostrar Información"
-function mostrarInformacion() {
-  // Mostrar el nombre de la persona
-  document.getElementById('nombre').innerText = "Nombre: " + nombre;
-
-  // Buscar el nombre en Google Sheets para obtener el nombre del amigo secreto
-  obtenerAmigoSecreto(nombre)
-    .then(amigoSecreto => {
-      // Mostrar el amigo secreto en la página
-      document.getElementById('amigoSecreto').innerText = "Amigo Secreto: " + amigoSecreto;
-
-      // Mostrar la foto y la información
-      document.getElementById('foto').src = `./img/SS.png`; // Foto predeterminada
-      document.getElementById('informacion').style.display = 'block';
     })
-    .catch(error => {
-      console.error('Error al obtener amigo secreto:', error);
-    });
+    .catch(error => console.error('Error al cargar el archivo CSV:', error));
 }
 
-// Función para mostrar/ocultar el menú
-function toggleMenu() {
-  const menu = document.getElementById('menu');
-  menu.classList.toggle('show'); // Cambia entre mostrar y ocultar el menú
+// Función para procesar el archivo CSV y convertirlo en un array de objetos
+function procesarCSV(csv) {
+  const filas = csv.split('\n');  // Dividir las filas
+  const amigos = [];
+
+  for (let i = 0; i < filas.length; i++) {
+    const celdas = filas[i].split(',');  // Dividir las celdas por comas
+    if (celdas.length >= 4) {  // Asegurarse de que haya al menos 4 celdas (nombre, código, amigoSecreto, descripcion)
+      amigos.push({
+        nombre: celdas[0].trim(),
+        codigo: celdas[1].trim(),
+        amigoSecreto: celdas[2].trim(),
+        descripcion: celdas[3] ? celdas[3].trim() : ''
+      });
+    }
+  }
+
+  return amigos;
 }
 
-// Llamar la función para inicializar Google API cuando la página cargue
-//window.onload = initGoogleAPI;
-window.onload = initAuth;
+// Función para obtener el amigo secreto basado en el nombre del usuario
+function obtenerAmigoSecreto(amigos, nombreUsuario) {
+  return amigos.find(amigo => amigo.nombre === nombreUsuario);  // Buscar al amigo que tenga el mismo nombre
+}
