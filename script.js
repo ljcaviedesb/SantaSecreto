@@ -13,9 +13,6 @@ function obtenerNombreDesdeURL() {
   }
 }
 
-console.log(obtenerNombreDesdeURL());  // Para verificar que se obtiene correctamente el nombre
-
-
 function mostrarInformacion() {
   const nombreUsuario = obtenerNombreDesdeURL();  // Obtener el nombre del parámetro en la URL
   
