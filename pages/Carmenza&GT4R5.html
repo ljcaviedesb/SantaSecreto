@@ -41,23 +41,21 @@
     </div>
     <!-- Párrafo con instrucciones -->
     <p id="instrucciones">
-      ¡Bienvenido al juego de Santa Secreto! Haz clic en el botón para descubrir quién es tu amigo secreto y ver la información que tu amigo ha dejado para ti. Tambien, podrás añadir una tus gustos o lo que te gustaría recibir de regalo esta navidad para ayudar a tu Santa Secreto a encontrar el regalo perfecto para ti. El monto mínimo este año es de $90.000, lo sé, la inflación está terrible, pero va a ser un regalo que darás con mucho amor y recibirás con mucho amor. 
+      ¡Bienvenido al juego de Santa Secreto! Haz clic en el botón para descubrir quién es tu amigo secreto y ver la información que tu amigo ha dejado para ti. Tambien, podrás añadir una tus gustos o lo que te gustaría recibir de regalo esta navidad para ayudar a tu Santa Secreto a encontrar el regalo perfecto para ti.  
+    </p>
+    <p id="instrucciones">
+      El monto mínimo este año es de $90.000, lo sé, la inflación está terrible, pero va a ser un regalo que darás con mucho amor y recibirás con mucho amor.
     </p>
 
     <!-- Botón de mostrar descripción -->
-    <button id="descripcionBtn" onclick="mostrarFormulario()">Escribir Descripción</button>
+    <button id="descripcionBtn" onclick="mostrarFormulario()">¿Qué te gustaría de regalo?</button>
 
     <!-- Formulario para la descripción -->
     <div id="formulario" class="formulario">
-      <textarea id="descripcion" placeholder="Escribe tu descripción aquí"></textarea>
+      <textarea id="descripcion" placeholder="Ayúdale a tu amigo secreto dandole pistas para que sepa qué regalarte."></textarea>
       <button onclick="actualizarDescripcionEnSheet()">Enviar</button>
     </div>
   </section>
-
-  <!-- Carga la librería de Google API -->
-  <script src="https://apis.google.com/js/api.js"></script>
-  <script src="https://apis.google.com/js/platform.js"></script>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
 
   <!-- Tu script de JavaScript -->

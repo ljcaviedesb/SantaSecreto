@@ -37,7 +37,7 @@ function mostrarInformacion() {
       if (amigoSecreto) {
         document.getElementById("nombreAmigo").innerText = `Amigo Secreto: ${amigoSecreto.amigoSecreto}`;
         document.getElementById("codigoAmigo").innerText = `Código: ${amigoSecreto.codigo}`;
-        document.getElementById("descripcionAmigo").innerText = amigoSecreto.descripcion || 'No hay descripción';
+        document.getElementById("descripcionAmigo").innerText = amigoSecreto.descripcion || 'Tu amigo secreto no ha dicho nada :(';
       } else {
         alert("No se encontró el amigo secreto para este nombre.");
       }
@@ -85,7 +85,7 @@ document.getElementById("mostrarInformacionBtn").addEventListener("click", funct
   if (amigoSecreto) {
     document.getElementById("nombreAmigo").innerText = `Amigo Secreto: ${amigoSecreto}`;
     // Si tienes descripción, también la mostrarías aquí
-    document.getElementById("descripcionAmigo").innerText = "No hay descripción"; // Como no hay descripción, se pone esto por defecto
+    document.getElementById("descripcionAmigo").innerText = "Tu amigo secreto no ha dicho nada :("; // Como no hay descripción, se pone esto por defecto
   } else {
     alert("No se encontró el amigo secreto para este nombre.");
   }
